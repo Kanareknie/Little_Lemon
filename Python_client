@@ -1,0 +1,17 @@
+import pandas as pd
+import mysql.connector as connector
+try:   
+    conn = connector.connect(user="", password="",database="")
+    print("Connected Succesfully")
+except:
+    print("Failed to Connect")
+Connected Succesfully
+cursor = conn.cursor()
+cursor.execute("SHOW TABLES;")
+result = cursor.fetchall()
+print(result)
+print
+[('bookings',), ('customer',), ('menu',), ('orderdeliverystatus',), ('orders',), ('ordersview',), ('staff',)]
+cursor.execute("""SELECT c.Name,
+               c.ContactNumber FROM Customer AS c INNER JOIN Orders AS o 
+               ON c.CustomerID = o.CustomerID WHERE o.Total_Cost > 60""")
